@@ -32,25 +32,20 @@ const selectImage = (index) => {
   playerSelectedImg.style.backgroundImage = gameData[index].backgroundImg;
   playerSelectedText.innerText = gameData[index].name;
 };
+const removeAllClick = () => {
+  rockBtn.classList.remove("click");
+  scissorBtn.classList.remove("click");
+  paperBtn.classList.remove("click");
+};
 
+const addClassClick = (btn) => {
+  btn.classList.add("click");
+};
 selecBox.addEventListener("click", (e) => {
   computerSelectedImg.style.backgroundImage = "";
   computerSelectedText.innerText = "";
-  if (e.target === rockBtn) {
-    rockBtn.classList.add("click");
-    scissorBtn.classList.remove("click");
-    paperBtn.classList.remove("click");
-  } else if (e.target === scissorBtn) {
-    rockBtn.classList.remove("click");
-    scissorBtn.classList.add("click");
-    paperBtn.classList.remove("click");
-  } else if (e.target === paperBtn) {
-    rockBtn.classList.remove("click");
-    scissorBtn.classList.remove("click");
-    paperBtn.classList.add("click");
-  } else {
-    return false;
-  }
+  removeAllClick();
+  addClassClick(e.target);
   selectImage(gameData.findIndex((data) => data.name === e.target.id));
   setTimeout(() => {
     getRandomComputerImage();
